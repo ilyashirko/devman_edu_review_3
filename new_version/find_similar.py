@@ -8,9 +8,8 @@ def find_my_film(keyword, films_data):
             return film
     return None
 
-  # Незачем записывать в вводные данные те данные, которые нельзя ввести извне
-def get_rating(my_film, films_database):
-    num_to_recommend = 8
+  
+def get_rating(my_film, films_database_fragment, num_to_recommend=8):
     params = {
         'belongs_to_collection': 1000,
         'original_language': 300,
@@ -18,7 +17,7 @@ def get_rating(my_film, films_database):
         'genres': 500
     }
     rating = {}
-    for film in films_database:
+    for film in films_database_fragment:
         film_rate = 0
         for parameter in params:
             if film[parameter] == my_film[parameter]:
@@ -36,16 +35,16 @@ def get_rating(my_film, films_database):
 
 if __name__ == '__main__':
     path = input('Enter path to DataBase:')
-    films_database = load_data(path)
-    if not films_database:
+    films_database_fragment = load_data(path)
+    if not films_database_fragment:
         print('DataBase not found, sorry...')
         raise SystemExit
     keyword_for_search = input('Enter film to search for:')
-    my_film = find_my_film(keyword_for_search, films_database)
+    my_film = find_my_film(keyword_for_search, films_database_fragment)
     if not my_film:
         print('No such film in FilmsDB')
         raise SystemExit
-    recommendation = get_rating(my_film, films_database)
+    recommendation = get_rating(my_film, films_database_fragment)
     if recommendation:
         print('Look at the similar films:')
         for film in sorted(recommendation):
