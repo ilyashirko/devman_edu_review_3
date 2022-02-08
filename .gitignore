@@ -1,3 +1,8 @@
 .idea/
 __pycache__
 *.json
+New_Version/api_key.txt
+New_Version/test.py
+new_version/__pycache__
+new_version/Trash
+new_version/api_key.txt
