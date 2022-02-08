@@ -12,22 +12,22 @@ def load_data(path):
 
 
   # films_data - может быть прочитана как film's data, т.е. информация о фильме, а не база фильмов
-def search_for_film(keyword, films_database):  
+def search_for_film(keyword, films_database_fragment):  
     films_found = set()
-    for film in films_database:
+    for film in films_database_fragment:
         if keyword.lower() in film['original_title'].lower():
             films_found.add(film['original_title'])
     return films_found
 
 
 if __name__ == '__main__':
-    path = input('Enter path to DataBase: ')
-    films_database = load_data(path)
-    if not films_database:
+    path = input('Enter path to local fragment of films database: ')
+    films_database_fragment = load_data(path)
+    if not films_database_fragment:
         print('DataBase not found, sorry...')  # если назвали файл DataBase, то не найден DataBase, а не File
         raise SystemExit
     keyword_for_search = input('Enter film to search for: ')  # "keyword" не отображает назначение переменной
-    result = search_for_film(keyword_for_search, films_database)
+    result = search_for_film(keyword_for_search, films_database_fragment)
       # Не помешает добавить общительности. 
       # Без нее, если найден один фильм - программа похожа на echo, 
       # если ничего не найдено - похоже на поломку.
