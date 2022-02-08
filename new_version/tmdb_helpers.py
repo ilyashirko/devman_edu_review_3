@@ -5,12 +5,14 @@ import json
 from getpass import getpass
 
 
-def make_tmdb_api_request(method, api_key):  # extra_params - нигде не используется, ни на что не влияет
+def make_tmdb_api_request(method, api_key, extra_params=None):
+    extra_params = extra_params or {}
     url = 'https://api.themoviedb.org/3%s' % method
     params = {
         'api_key': api_key,
         'language': 'ru',
     }
+    params.update(extra_params)
     return load_json_data_from_url(url, params)
 
 
