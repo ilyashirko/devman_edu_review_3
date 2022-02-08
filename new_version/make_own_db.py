@@ -6,7 +6,7 @@ from tqdm import tqdm
 from tmdb_helpers import get_user_api_key
 from tmdb_helpers import make_tmdb_api_request
 
-def load_films(user_api_key, films_amount):  # films_amount уже определен в if main
+def load_films(user_api_key, films_amount=1000):
     all_films = []
     for film_id in tqdm(range(films_amount)):  # более дружелюбное отображение статуса
         try:
@@ -25,13 +25,13 @@ if __name__ == '__main__':
         raise SystemExit
     print('please, wait, this operation may take smth like 15-20 minutes')
 
-      # нет смысла в отдельном присваивании films_amount. Либо константа либо в вызове.
-    all_films = load_films(user_api_key, films_amount=1000)
-    with open(file='MyFilmDB.json', mode='w', encoding='utf-8') as my_file:  # with open(file=...) not path=
+    films_amount = 1000
+    all_films = load_films(user_api_key, films_amount)
+    with open(file='fragment_of_films_DB.json', mode='w', encoding='utf-8') as my_file:  # with open(file=...) not path=
         json.dump(all_films, my_file, indent=4, ensure_ascii=False)
           # Целесообразно сохранить данные в читабельном виде.
           # Программе - все равно, а если пользователю или разработчику понадобится - поймет содержимое
 
       # Учитывая, что дальше пользователю понадобится вводить путь к базе,
       # целесообразно этот путь ему сообщить
-    print(f'База фильмов сохранена в файле:\n{os.getcwd()}/MyFilmDB.json')
+    print(f'База фильмов сохранена в файле:\n{os.getcwd()}/fragment_of_films_DB.json')
