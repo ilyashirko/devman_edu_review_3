@@ -1,3 +1,6 @@
+created with education porposes for making review by [DEVMAN](https://dvmn.org)
+review made by [@ilyashirko](https://github.com/ilyashirko)
+
 # tmdb_api
 Упражнение на чтение кода. Фильмы с TMDB
 
